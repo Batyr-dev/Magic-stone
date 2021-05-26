@@ -1200,6 +1200,23 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
             zigzag_stone_count += 1                         
             if zigzag_stone_count == 15:
                 zigzag_bool = False
+#------------------------------------------------------------------------------------------------------------------#    
+    #def of trump stones to style square in the corners
+    def square_of_corner():
+        stone_of_corner_sound = pygame.mixer.Sound('fx/stone_of_corner_sound.wav')
+        stone_of_corner_sound.set_volume(0.8)
+        corner_stone_coords = [[2, 6, 3, 7], [8, 12, 9, 13], [0, 4, 1, 5], [10, 14, 11]]
+        stone_random_step = 0
+        for s in range(4):
+            stone_of_corner_sound.stop()
+            stone_of_corner_sound.play()
+            for stone_step in range(len(corner_stone_coords[s])):
+                for i in range(1, 255, 10):
+                    stones[stone_random[stone_random_step]].set_alpha(i)
+                    screen.blit(stones[stone_random[stone_random_step]], stone_cells_coords[corner_stone_coords[s][stone_step]])
+                    pygame.display.flip()
+                    clock.tick(120)
+                stone_random_step += 1
 #------------------------------------------------------------------------------------------------------------------#
     #def show players best score
     def show_players_best_score(game_main_music_step, score_file_bool):
@@ -1973,13 +1990,18 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
         right_to_left()
         #register stones position in cells
         game_stone_register = [stone_random[0], stone_random[1], stone_random[2], stone_random[3], stone_random[7], stone_random[6], stone_random[5], stone_random[4], stone_random[8], stone_random[9], stone_random[10], stone_random[11], -1, stone_random[14], stone_random[13], stone_random[12]]
+    elif random_trump_stones == 3:
+        #square_of_corner
+        square_of_corner()
+        #register stones position in cells        
+        game_stone_register = [stone_random[8], stone_random[10], stone_random[0], stone_random[2], stone_random[9], stone_random[11], stone_random[1], stone_random[3], stone_random[4], stone_random[6], stone_random[12], stone_random[14], stone_random[5], stone_random[7], stone_random[13], -1]    
     else:
         #up_to_down trump stones
         up_to_down()
         #register stones position in cells
         game_stone_register = [stone_random[3], stone_random[4], stone_random[11], stone_random[12], stone_random[2], stone_random[5], stone_random[10], stone_random[13], stone_random[1], stone_random[6], stone_random[9], stone_random[14], stone_random[0], stone_random[7], stone_random[8], -1]
     random_trump_stones += 1
-    if random_trump_stones == 4:
+    if random_trump_stones == 5:
         random_trump_stones = 0
     #change the message progess bar
     screen.blit(progress_bar_clear, progress_bar_clear_rect)
