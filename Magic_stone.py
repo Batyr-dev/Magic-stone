@@ -46,6 +46,8 @@ def intro():
     story_text1 = ['And the wanderer found a spell that summoned', 'souls from the death world of Anubis.']
     story_text2 = ['And he began to test his fate.']
     story_texts = [story_text0, story_text1, story_text2]
+    story_texts_color = [(48, 180, 207), (127, 0, 0)]
+    story_texts_color_change = story_texts_color[0]
     story_text_step1 = 0
     story_text_step2 = 0    
     story_text_font_size = 25
@@ -149,7 +151,7 @@ def intro():
                 episode_1_step += 5
             if story_text_bool:
                 if story_image_step > 15 and story_image_step < 130:
-                    story_text_surface = story_text_font_name.render(story_texts[story_text_step1][story_text_step2], True, (48, 180, 207))
+                    story_text_surface = story_text_font_name.render(story_texts[story_text_step1][story_text_step2], True, story_texts_color_change)
                     screen.blit(story_text_surface, (story_text_font_x, story_text_font_y))
                     pygame.display.flip()
                 if story_image_step == 150:
@@ -163,7 +165,7 @@ def intro():
                     if episode_1_change_image == 2:
                         pass
                     else: 
-                        story_text_surface = story_text_font_name.render(story_texts[story_text_step1][story_text_step2], True, (48, 180, 207))
+                        story_text_surface = story_text_font_name.render(story_texts[story_text_step1][story_text_step2], True, story_texts_color_change)
                         screen.blit(story_text_surface, (story_text_font_x, story_text_font_y))
                         pygame.display.flip()
                 if story_image_step == 255:
@@ -176,7 +178,8 @@ def intro():
                 story_image_step = 0
                 story_text_alpha_bool = True
                 if episode_1_change_image == 2:
-                    story_text_step2 = 0                    
+                    story_text_step2 = 0 
+                    story_texts_color_change = story_texts_color[1]
                 if episode_1_change_image == 3:                    
                     episode_1_bool = False
                     episode_2_bool = True
