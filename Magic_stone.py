@@ -874,8 +874,7 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
             minutes_left = 0
             seconds_right = 0
             seconds_left = 0
-            show_players_best_score()
-            
+            show_players_best_score(game_main_music_step, False)
         #show time indecators    
         timer_min_sec_surface = timer_min_sec_font.render('{}{}:{}{}:{}{}'.format(hour_left, hour_right, minutes_left, minutes_right, seconds_left, seconds_right), True, time_show_color[1])   
         screen.blit(timer_min_sec_surface, (timer_min_sec_x, timer_min_sec_y))
