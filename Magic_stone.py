@@ -1217,7 +1217,7 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
                     stones[stone_random[stone_random_step]].set_alpha(i)
                     screen.blit(stones[stone_random[stone_random_step]], stone_cells_coords[corner_stone_coords[s][stone_step]])
                     pygame.display.flip()
-                    clock.tick(120)
+                    clock.tick(150)
                 stone_random_step += 1
 #------------------------------------------------------------------------------------------------------------------#
     #def show players best score
