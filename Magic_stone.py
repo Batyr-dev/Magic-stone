@@ -1478,6 +1478,7 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
 
                             anubis_word_step = ''
                             for i in range(23):
+                                quit_escape()
                                 anubis_word_step += anubis_word[i]
                                 anubis_word_surface = anubis_word_font_name.render(anubis_word_step, True, anubis_word_color)    
                                 screen.blit(anubis_word_surface, (anubis_word_font_x, anubis_word_font_y))            
