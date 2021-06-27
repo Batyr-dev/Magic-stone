@@ -1922,6 +1922,28 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
     #push game     
     push_game_bool = True
     push_button_surface_color_bool = True
+    
+    #initialization parametrs rules of the game
+    rules_text_image1 = pygame.image.load('rules_text_image1.png').convert()
+    rules_text_image1 = pygame.transform.scale(rules_text_image1, (300, 60))
+    rules_text_image1_rect = ((arena_for_stones_rect[0] + 500 // 2 - 150), (arena_for_stones_rect[1] + 80))
+
+    rules_text_image2 = pygame.image.load('rules_text_image2.png').convert()
+    rules_text_image2 = pygame.transform.scale(rules_text_image2, (350, 60))
+    rules_text_image2_rect = ((arena_for_stones_rect[0] + 500 // 2 - 175), (arena_for_stones_rect[1] + 140))
+
+    rules_correct_alignment_image = pygame.image.load('rules_correct_alignment_image.png').convert()
+    rules_correct_alignment_image = pygame.transform.scale(rules_correct_alignment_image, (220, 220))
+    rules_correct_alignment_image_rect = ((arena_for_stones_rect[0] + 500 // 2 - 110), (arena_for_stones_rect[1] + 200))
+
+    rules_show_image_bool = True
+    rules_show_image1_bool = True
+    rules_show_image2_bool = False
+    rules_show_image3_bool = False
+
+    rules_show_image_step = 0
+    rules_show_image_alpha_step = 0 
+    
     while push_game_bool:
         #get ending music track 
         if pygame.mixer.music.get_pos() == -1:
@@ -1945,6 +1967,10 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
                 if (mouse_x >= push_press_button_rect[0] and mouse_x <= push_press_button_rect[0] + 99) and (mouse_y >= push_press_button_rect[1] and mouse_y <= push_press_button_rect[1] + 79):                    
                     pressed = pygame.mouse.get_pressed()
                     if pressed[0] == 1:
+                        #update arena for stones
+                        rules_show_image_bool = False
+                        screen.blit(arena_for_stones, arena_for_stones_rect)
+                        pygame.display.flip()
                         #change the message progess bar
                         screen.blit(progress_bar_clear, progress_bar_clear_rect)
                         pygame.display.flip()
@@ -1962,7 +1988,39 @@ def game_center(playerName, game_main_music_step, random_trump_stones):
                         pygame.display.flip()
                         push_game_bool = False
                         push_button_surface_color_bool = False
+        #show text rules
+        if rules_show_image_bool:
+            if rules_show_image1_bool:
+                if rules_show_image_alpha_step <= 255:
+                    rules_text_image1.set_alpha(rules_show_image_alpha_step)
+                    screen.blit(rules_text_image1, rules_text_image1_rect)
+                    pygame.display.flip()                   
+                    rules_show_image_alpha_step += 10
+                else:
+                    rules_show_image_alpha_step = 0
+                    rules_show_image1_bool = False
+                    rules_show_image2_bool = True                    
+            if rules_show_image2_bool:
+                if rules_show_image_alpha_step <= 255:
+                    rules_text_image2.set_alpha(rules_show_image_alpha_step)
+                    screen.blit(rules_text_image2, rules_text_image2_rect)
+                    pygame.display.flip()
+                    rules_show_image_alpha_step += 10
+                else:
+                    rules_show_image_alpha_step = 0
+                    rules_show_image2_bool = False
+                    rules_show_image3_bool = True
+            if rules_show_image3_bool:
+                if rules_show_image_alpha_step <= 255:
+                    rules_correct_alignment_image.set_alpha(rules_show_image_alpha_step)
+                    screen.blit(rules_correct_alignment_image, rules_correct_alignment_image_rect)
+                    pygame.display.flip()
+                    rules_show_image_alpha_step += 10
+                else:
+                    rules_show_image3_bool = False
+                    rules_show_image_bool = False
 
+        #change color buttons font  
         if push_button_surface_color_bool:
             push_button_surface = push_button_font_name.render(push_button_text, True, player_colors[player_color_step])
             push_button_font_x = (push_press_button_rect[0] + 50 - push_button_surface.get_width() // 2)
