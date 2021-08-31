@@ -516,7 +516,7 @@ def player_name(game_main_music_step, random_trump_stones):
                 pygame.quit()
                 sys.exit()        
             if event.type == pygame.KEYDOWN:                
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                     if len(name_player) == 0:
                         continue                        
                     else:
